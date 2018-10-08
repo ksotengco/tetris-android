@@ -40,13 +40,16 @@ public class GridView extends View {
         cv = new TGrid.CellVisitor() {
             @Override
             public void visitCell(TCell tCell) {
-                if (tCell != null) {
-                    colorPaint.setColor(tCell.myColor);
-                    Log.d("Color", "Counter: " + ++counter);
-                    drawBlock(colorPaint);
-                } else {
-                    Log.d("Null", "Counter: " + ++counter);
-                    drawBlock(null);
+                Log.d("visitCell", "Counter: " + ++counter);
+
+                //++counter;
+                if (counter > g.getWidth() * 3) {
+                    if (tCell != null) {
+                        colorPaint.setColor(tCell.myColor);
+                        drawBlock(colorPaint);
+                    } else {
+                        drawBlock(null);
+                    }
                 }
             }
         };
@@ -114,19 +117,9 @@ public class GridView extends View {
         super.onDraw(canvas);
         drawingCanvas = canvas;
 
-
         if (g != null) {
-            int w = g.getWidth();
-            int h = g.getHeight();
-
-            Tetromino tm = TetrominoBuilder.I();
-            tm.insertIntoGrid(2, 5, g);
-
             g.visitCells(cv);
-            //paint.setColor(g.getColor());
-            /*for (float i = 0; i < this.getWidth(); i+= draw_width) {
-                canvas.drawRect(i, y, i + draw_width, y + draw_height, paint);
-            }*/
+            counter = 0;  // reset the counter for redraws
         }
     }
 }

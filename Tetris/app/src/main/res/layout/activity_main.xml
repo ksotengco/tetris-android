@@ -127,7 +127,28 @@
         android:layout_height="0dp"
         android:layout_weight="1.5">
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:id="@+id/zoom_down_button"
+            android:text="zoom down"
+            android:onClick="onZoomDown"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/zoom_down_button"
+            android:id="@+id/left_button"
+            android:onClick="onShiftLeft"/>
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/left_button"
+            android:id="@+id/right_button"
+            android:onClick="onShiftRight"/>
     </RelativeLayout>
 
 </LinearLayout>
