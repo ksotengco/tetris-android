@@ -90,7 +90,8 @@
             android:text="RESET"
             android:id="@+id/reset_button"
             android:layout_toStartOf="@id/pad_button1"
-            android:layout_alignParentBottom="true"/>
+            android:layout_alignParentBottom="true"
+            android:onClick="onReset"/>
 
         <Button
             android:layout_width="wrap_content"
@@ -127,28 +128,80 @@
         android:layout_height="0dp"
         android:layout_weight="1.5">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:id="@+id/zoom_down_button"
-            android:text="zoom down"
-            android:onClick="onZoomDown"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toEndOf="@id/zoom_down_button"
+        <ImageButton
             android:id="@+id/left_button"
-            android:onClick="onShiftLeft"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:background="@null"
+            android:onClick="onShiftLeft"
+            android:src="@drawable/arrow_left" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
+            android:id="@+id/pad_button4"
             android:layout_toEndOf="@id/left_button"
+            android:visibility="invisible"
+            android:minWidth="0dp"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/pad_button4"
+            android:id="@+id/zoom_down_button"
+            android:onClick="onZoomDown"
+            android:background="@null"
+            android:src="@drawable/arrow_down" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/pad_button5"
+            android:layout_toEndOf="@+id/zoom_down_button"
+            android:visibility="invisible"
+            android:minWidth="0dp"/>
+
+        <ImageButton
             android:id="@+id/right_button"
-            android:onClick="onShiftRight"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/pad_button5"
+            android:background="@null"
+            android:onClick="onShiftRight"
+            android:src="@drawable/arrow_right" />
+
+        <ImageButton
+            android:id="@+id/rotate_left_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@id/pad_button7"
+            android:background="@null"
+            android:onClick="onRotateLeft"
+            android:src="@drawable/rotate_left" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/pad_button7"
+            android:layout_toStartOf="@id/rotate_right_button"
+            android:visibility="invisible"
+            android:minWidth="0dp"/>
+
+        <ImageButton
+            android:id="@+id/rotate_right_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:background="@null"
+            android:onClick="onRotateRight"
+            android:src="@drawable/rotate_right" />
+
     </RelativeLayout>
 
 </LinearLayout>

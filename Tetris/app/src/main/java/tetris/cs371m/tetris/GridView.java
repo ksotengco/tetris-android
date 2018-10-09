@@ -21,6 +21,8 @@ public class GridView extends View {
 
     private int counter;
 
+    boolean isGame;
+
     Paint borderPaint;
     Paint colorPaint;
 
@@ -43,7 +45,7 @@ public class GridView extends View {
                 Log.d("visitCell", "Counter: " + ++counter);
 
                 //++counter;
-                if (counter > g.getWidth() * 3) {
+                if (counter > g.getWidth() * 3 || !isGame) {
                     if (tCell != null) {
                         colorPaint.setColor(tCell.myColor);
                         drawBlock(colorPaint);
@@ -70,8 +72,9 @@ public class GridView extends View {
         init();
     }
 
-    public void setGrid(TGrid g) {
+    public void setGrid(TGrid g, boolean isGame) {
         this.g = g;
+        this.isGame = isGame;
         invalidate();
     }
 
@@ -83,8 +86,8 @@ public class GridView extends View {
 
     public void drawBlock (Paint paint) {
         float dWidth = (float) this.getWidth()/(float) g.getWidth();
-        float dHeight = (float) this.getHeight()/(float) (g.getHeight() - 3);
-
+        float dHeight = isGame ? (float) this.getHeight()/(float) (g.getHeight() - 3)
+                        : (float) this.getHeight()/(float) (g.getHeight());
 
         // draws both border and square; border thicker if tetromino piece
         if (paint != null) {
