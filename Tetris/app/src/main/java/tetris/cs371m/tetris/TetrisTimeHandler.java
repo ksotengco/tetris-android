@@ -12,12 +12,9 @@ public class TetrisTimeHandler {
     private Runnable rateLimitRequest;
     private Handler handler;
 
-    private final int rateLimitMillis = 1000; // full second
+    private int rateLimitMillis = 1000; // 1 second
 
     public TetrisTimeHandler (final IUpdate iUpdate) {
-        /*handlerThread = new HandlerThread("TetrisTimeHandler");
-        handlerThread.start();*/
-
         // tried to invalidate gameView on different thread but that doesn't work;
         // using main thread for this
         handler = new Handler(Looper.getMainLooper());
@@ -25,15 +22,26 @@ public class TetrisTimeHandler {
         rateLimitRequest = new Runnable() {
             @Override
             public void run() {
-                iUpdate.updateTetrisBlock();
                 handler.postDelayed(this, rateLimitMillis);
+                iUpdate.updateTetrisBlock();
             }
         };
 
         handler.postDelayed(rateLimitRequest, rateLimitMillis);
     }
 
+    public void speedUp() {
+        handler.removeCallbacks(rateLimitRequest);
+        int diff = (int)(rateLimitMillis * 0.20);
+        rateLimitMillis -= diff;
+        handler.postDelayed(rateLimitRequest, rateLimitMillis);
+    }
+
     public void stopCallbacks () {
         handler.removeCallbacks(rateLimitRequest);
+    }
+
+    public void resumeCallbacks () {
+        handler.postDelayed(rateLimitRequest, rateLimitMillis);
     }
 }

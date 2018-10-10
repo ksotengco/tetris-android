@@ -40,16 +40,15 @@ public class EspressoT2 {
 
     @Before
     public void prepareCommands() throws Exception {
-
-        left_button = onView(withId(R.id.left));
-        rotate_left_button = onView(withId(R.id.rotate_counter));
-        down_button = onView(withId(R.id.down));
-        rotate_right_button = onView(withId(R.id.rotate_clock));
-        right_button = onView(withId(R.id.right));
-        reset_button = onView(withId(R.id.reset));
-        level = onView(withId(R.id.level));
-        score = onView(withId(R.id.score));
-        cleared = onView(withId(R.id.cleared));
+        left_button = onView(withId(R.id.left_button));
+        rotate_left_button = onView(withId(R.id.rotate_left_button));
+        down_button = onView(withId(R.id.zoom_down_button));
+        rotate_right_button = onView(withId(R.id.rotate_right_button));
+        right_button = onView(withId(R.id.right_button));
+        reset_button = onView(withId(R.id.reset_button));
+        level = onView(withId(R.id.level_view));
+        score = onView(withId(R.id.score_view));
+        cleared = onView(withId(R.id.row_view));
     }
 
     @Test
@@ -60,9 +59,9 @@ public class EspressoT2 {
             TestUtil.clickButtonEspresso(level3.get(i), right_button, left_button, down_button, rotate_left_button, rotate_right_button, reset_button);
             SystemClock.sleep(1000);
         }
-        level.check(matches(withText("3")));
-        score.check(matches(withText("24")));
-        cleared.check(matches(withText("13")));
+        level.check(matches(withText("Level: 3")));
+        score.check(matches(withText("Score: 24")));
+        cleared.check(matches(withText("Rows: 13")));
     }
 
 
