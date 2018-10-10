@@ -11,6 +11,7 @@ import android.view.View;
 
 import java.util.ArrayList;
 
+// template from demo code, revamped for this project
 public class GridView extends View {
 
     private TGrid g;
@@ -44,7 +45,7 @@ public class GridView extends View {
             public void visitCell(TCell tCell) {
                 Log.d("visitCell", "Counter: " + ++counter);
 
-                //++counter;
+                // does not print top three rows unless next block preview
                 if (counter > g.getWidth() * 3 || !isGame) {
                     if (tCell != null) {
                         colorPaint.setColor(tCell.myColor);
@@ -74,15 +75,9 @@ public class GridView extends View {
 
     public void setGrid(TGrid g, boolean isGame) {
         this.g = g;
-        this.isGame = isGame;
+        this.isGame = isGame; // determines whether or not view is gameBoard or preview View
         invalidate();
     }
-
-    /*public void setPos(int x, int y) {
-        this.x = x;
-        this.y = y;
-        invalidate();
-    }*/
 
     public void drawBlock (Paint paint) {
         float dWidth = (float) this.getWidth()/(float) g.getWidth();

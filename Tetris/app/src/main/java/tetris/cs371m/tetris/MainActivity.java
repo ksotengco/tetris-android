@@ -4,10 +4,13 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 public class MainActivity extends AppCompatActivity
                           implements TetrisTimeHandler.IUpdate {
@@ -91,6 +94,25 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.level_up && !lost) {
+            handler.changeSpeed(++level);
+            levelsView.setText("Level: " + level);
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     protected void onRestart() {
         super.onRestart();
         Log.d("onRestart", "yey");
@@ -155,6 +177,12 @@ public class MainActivity extends AppCompatActivity
 
         lost = false;
 
+        handler.resumeCallbacks();
+        // solution to race condition
+        handler.changeSpeed(-1);
+
+        handler.stopCallbacks();
+
         if (currentTet != null) {
             currentTet.removeFromGrid();
             currentTet = null;
@@ -162,6 +190,14 @@ public class MainActivity extends AppCompatActivity
 
         TetrominoBuilder.resetRandom();
         spawnTetromino();
+
+        rows = 0;
+        score = 0;
+        level = 1;
+
+        rowsView.setText("Rows: " + rows);
+        scoreView.setText("Score: " + score);
+        levelsView.setText("Level: " + level);
 
         gameView.invalidate();
         handler.resumeCallbacks();
@@ -192,8 +228,7 @@ public class MainActivity extends AppCompatActivity
                 rows++;
 
                 if (rows % 5 == 0) {
-                    level++;
-                    handler.speedUp();
+                    handler.changeSpeed(++level);
                 }
 
                 row = gameBoard.getFirstFullRow();

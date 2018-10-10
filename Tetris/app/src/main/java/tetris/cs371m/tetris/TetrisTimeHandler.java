@@ -14,6 +14,7 @@ public class TetrisTimeHandler {
 
     private int rateLimitMillis = 1000; // 1 second
 
+    // from MusicPlayer, revaped for this project
     public TetrisTimeHandler (final IUpdate iUpdate) {
         // tried to invalidate gameView on different thread but that doesn't work;
         // using main thread for this
@@ -30,10 +31,19 @@ public class TetrisTimeHandler {
         handler.postDelayed(rateLimitRequest, rateLimitMillis);
     }
 
-    public void speedUp() {
+    public void changeSpeed(int level) {
+        // attempt at atomicity
         handler.removeCallbacks(rateLimitRequest);
-        int diff = (int)(rateLimitMillis * 0.20);
-        rateLimitMillis -= diff;
+
+        // reset
+        if (level == -1) {
+            rateLimitMillis = 1000;
+        } else {
+            // rate - 20% of rate
+            int diff = (int) (rateLimitMillis * 0.20);
+            rateLimitMillis -= diff;
+        }
+
         handler.postDelayed(rateLimitRequest, rateLimitMillis);
     }
 
