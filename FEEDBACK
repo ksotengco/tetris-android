@@ -1,0 +1,56 @@
+Rubic
+===================================================
+98 - Board
+    3	Incorrect grid size
+    2	Grid cells aren't square
+    1	No black outlines
+    3	Active tetromino doesn't start off screen
+    20	Tetromino doesn't descend
+    4	Initial decent speed noticeably different from 1 second
+    6	Level up doesn't increase speed
+    2	Input from controls delayed (should be instant)
+    4	Full row doesn't clear
+    4	full cells above clear row don't descend (should drop one row)
+    4	When multiple rows should clear, only some strict subset of them do
+    4	Tetromino Starts Off Center
+    4	Game continues After End
+    2	Incorrect responses to controls (right)
+    2	Incorrect responses to controls (left)
+    2	Incorrect responses to controls (down)
+    2	Incorrect responses to controls (rotate right)
+    2	Incorrect responses to controls (rotate left)
+    2	No Boarder (hard to play)
+    5	Game Speed Bug after Reset
+    5	Game Speed Bug
+    15	Becomes Unplayable
+
+9 - Preview
+    2	Piece displayed unrelated to game
+    2	Piece Is distorted
+    5	Preview Missing
+
+11 - Score
+    2	Not obvious which is which
+    3	Clear not updated when rows are cleared
+    3	Score not calculated correctly
+    3	Level not calculated correctly
+
+18 - Control
+    2	Not obvious what controls are
+    2	Right Missing
+    2	Left Missing
+    2	Down Missing
+    2	Rotate Left Missing
+    2	Rotate Right Missing
+    2	Reset Missing/Wrong
+    4	Press when game is stopped causes crash
+
+11 - Misc
+    1	README missing or bad
+    2	Does not notify User when Game is over
+    3	Not Polished
+    5	Level up button doesn't work
+Total: 147
+===================================================
+comments: 
+147
